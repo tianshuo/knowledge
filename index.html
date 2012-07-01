@@ -4,8 +4,7 @@
 <head>
 <meta charset="utf-8">
   <script src="http://static.firebase.com/v0/firebase.js"></script>
-    <script type="text/javascript" src="http://code.angularjs.org/1.0.1/angular-1.0.1.min.js"></script>
-    <script type="text/javascript" src="http://code.angularjs.org/1.0.1/angular-resource-1.0.1.min.js"></script>
+    <script type="text/javascript" src="angular-1.0.1.js"></script>
 
     <script type="text/javascript" src="script.js"></script>
 
@@ -13,16 +12,28 @@
 <body>
 
 <div ng-controller="Main">
+    <div ng-show="home" class="home"><h1>欢迎访问知识管理平台</h1><ul><li ng-repeat="page in pages"><a href="#{{page}}">{{page}}</a></li><ul></div>
+    <div ng-hide="home" class="page">
+        <h1>{{hash}}</h1>
+	    <form name="addForm">
+	    <select ng-model="type" ng-options="t for t in types" ></select><input type="text" placeholder="名称" ng-model="name" required>
+	    <button class="btn btn-primary" ng-click="addMessage()" ng-disabled="addForm.$invalid">新增章节</button>
+	
+	  </form>
+	    <hr />
+	    <div class="noContent" ng-hide="messages">目前还没有任何内容 <a ng-click="setTemplate('class')" >建立课程页面</a> <a ng-click="setTemplate('point')" >建立知识点页面</a></div>
+	    <div ng-repeat="(key,section) in messages">
+	    <form>
+	    <h2 ng-show="section.type"><span style="color:red">[{{section.type}}]</span>{{section.Title}}<button ng-click="deleteSection(key)" style="float:right; margin-left:50px">删除</button></h2>
+	   
+	    <div class="textSection" ng-show="section.type=='text'" ng-init="section.edit=false" > 
+	    	<span ng-show="section.edit==false">{{section.Content}}<button ng-click="section.edit=true" >编辑</button></span>	    
+	    	<textarea ng-show="section.edit==true" rows="3"  ng-model="section.Content" ></textarea><button ng-show="section.edit==true" ng-click="setText(key,section)" >保存</button></div>
+	    
+	    <div class="imageSection" ng-show="section.type=='image'" > <img ng-src="{{section.url}}" style="max-width:300px;"/><button ng-click="setImage(key, section.url)" >更换</button></div>
+	        </form></div>
+    </div>    
   
-    <div ng-repeat="(key,message) in messages"><h2>{{message.Title}}</h2>
-    <form><textarea rows="3" ng-model="message.Content" ></textarea><button ng-click="saveText()">保存</button>
-    </form></div>
-  
-  <hr />
-  <form name="addForm">
-    <input type="text" placeholder="名称" ng-model="name" required>
-    <button class="btn btn-primary" ng-click="addMessage()" ng-disabled="addForm.$invalid">新增章节</button>
-  </form>
 </div>
 
 </body>

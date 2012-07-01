@@ -13,14 +13,13 @@ function Main($scope){
     $scope.text = '';
   };
   
-  $scope.saveText = function() {
-    alert();
+  $scope.setText = function() {
+    alert("hello");
   };
   
   firebase.on('value', function(snapshot) {
     //var message = snapshot.val();
     //$scope.messages.push({name: message.Title, text: message.Content});
-    console.log(snapshot.val());
     $scope.messages=snapshot.val();
     if (!$scope.$$phase) $scope.$apply();
   });
