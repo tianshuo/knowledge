@@ -7,6 +7,16 @@
     <script type="text/javascript" src="angular-1.0.1.js"></script>
 
     <script type="text/javascript" src="script.js"></script>
+<style>
+.textSection button,.imageSection button, h2 button {
+	display:none;margin-left:50px;
+}
+
+.textSection:hover button,.imageSection:hover button,h2:hover button {
+	display:inline;
+}
+
+</style>
 
 </head>
 <body>
@@ -24,7 +34,7 @@
 	    <div class="noContent" ng-hide="messages">目前还没有任何内容 <a ng-click="setTemplate('class')" >建立课程页面</a> <a ng-click="setTemplate('point')" >建立知识点页面</a></div>
 	    <div ng-repeat="(key,section) in messages">
 	    <form>
-	    <h2 ng-show="section.type"><span style="color:red">[{{section.type}}]</span>{{section.Title}}<button ng-click="deleteSection(key)" style="float:right; margin-left:50px">删除</button></h2>
+	    <h2 ng-show="section.type"><span style="color:red">[{{section.type}}]</span>{{section.Title}}<button ng-click="deleteSection(key)" style=" margin-left:50px">删除</button></h2>
 	   
 	    <div class="textSection" ng-show="section.type=='text'" ng-init="section.edit=false" > 
 	    	<span ng-show="section.edit==false">{{section.Content}}<button ng-click="section.edit=true" >编辑</button></span>	    
