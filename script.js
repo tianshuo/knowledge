@@ -1,4 +1,4 @@
-var chat = angular.module('chat', []);
+var kms = angular.module('kms', []);
 firebase=browse = new Firebase('http://demo.firebase.com/edukms/');
   
  
