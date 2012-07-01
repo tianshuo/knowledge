@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="chat">
+<head>
+<meta charset="utf-8">
+  <script src="http://static.firebase.com/v0/firebase.js"></script>
+    <script type="text/javascript" src="http://code.angularjs.org/1.0.1/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="http://code.angularjs.org/1.0.1/angular-resource-1.0.1.min.js"></script>
+
+    <script type="text/javascript" src="script.js"></script>
+
+</head>
+<body>
+
+<div ng-controller="Main">
+  
+    <div ng-repeat="(key,message) in messages"><h2>{{message.Title}}</h2>
+    <form><textarea rows="3" ng-model="message.Content" ></textarea><button ng-click="saveText()">保存</button>
+    </form></div>
+  
+  <hr />
+  <form name="addForm">
+    <input type="text" placeholder="名称" ng-model="name" required>
+    <button class="btn btn-primary" ng-click="addMessage()" ng-disabled="addForm.$invalid">新增章节</button>
+  </form>
+</div>
+
+</body>
+</html>
