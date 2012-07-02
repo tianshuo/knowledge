@@ -1,13 +1,24 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html ng-app="kms">
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="kms">
 <head>
 <meta charset="utf-8">
-  <script src="http://static.firebase.com/v0/firebase.js"></script>
-    <script type="text/javascript" src="angular-1.0.1.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="tianshuo">
 
-    <script type="text/javascript" src="script.js"></script>
-<style>
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/mystyle.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+	  .home-head{background:url("img/header.png");height:250px;margin-bottom:-30px;}
+	  .home-head h1{color:#fff;opacity:0.9}
 .textSection button,.imageSection button, h2 button {
 	display:none;margin-left:50px;
 }
@@ -16,13 +27,84 @@
 	display:inline;
 }
 
-</style>
+.page-content{background:#eee;padding:50px;opacity:0.6;text-align:center;color:#000;font-size:2em;}
+.page-content:hover{opacity:0.7;border:#fff 1px solid;text-decoration:none;}
+
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+  <script src="http://static.firebase.com/v0/firebase.js"></script>
+    <script type="text/javascript" src="angular-1.0.1.js"></script>
+
+    <script type="text/javascript" src="script.js"></script>
 
 </head>
-<body>
+<body class="wood" ng-controller="Main">
+<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">知识管理平台</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+			<li><a>搜索</a></li>
+            <li><form class="navbar-search" action="" >
+              <input type="text" class="search-query span2" placeholder="查找页面或者作者" data-provide="typeahead" data-items="6" data-source='["初一数学", "初一语文", "初一生物", "初一地理", "初一历史", "初一政治", "初一体育", "初一计算机", "初一美术", "初一音乐", "初二数学", "初二语文", "初二物理", "初二生物", "初二地理", "初二历史", "初二政治", "初二体育", "初二计算机", "初二美术", "初二音乐", "初三数学", "初三语文", "初三物理", "初三化学", "初三生物", "初三地理", "初三历史", "初三政治", "初三体育", "初三计算机", "初三美术", "初三音乐", "高一数学", "高一语文", "高一物理", "高一化学", "高一生物", "高一地理", "高一历史", "高一政治", "高一体育", "高一计算机", "高一美术", "高一音乐", "高二数学", "高二语文", "高二物理", "高二化学", "高二生物", "高二地理", "高二历史", "高二政治", "高二体育", "高二计算机", "高二美术", "高二音乐", "高三数学", "高三语文", "高三物理", "高三化学", "高三生物", "高三地理", "高三历史", "高三政治", "高三体育", "高三计算机", "高三美术", "高三音乐"]'>
+            </form></li>
+            </ul>
 
-<div ng-controller="Main">
-    <div ng-show="home" class="home"><h1>欢迎访问知识管理平台</h1><ul><li ng-repeat="page in pages"><a href="#{{page}}">{{page}}</a></li><ul></div>
+
+            <ul class="nav pull-right">
+			<li><a href="#about" >消息 <span class="label label-warning">12</span></a></li>
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">帐号 <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">袁腾飞 老师</a></li>
+                <li><a href="#">个人资料</a></li>
+                <li class="divider"></li>
+                <li><a href="#">退出</a></li>
+              </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+<div class="container whitepage" ng-show="home" >
+	 <div class="container-inner"  class="home">
+      <div class="row">
+		  <div class="">
+			  <div class="hero-unit home-head">
+
+				<h1>欢迎访问知识管理平台</h1>
+
+			  </div>
+		  </div>
+		  
+	 </div>
+
+</div>
+</div>
+</div>
+<div class="container" ng-show="home">
+	 <div class="container-inner" class="home">
+	 <div class="row-fluid">
+	  <ul class="thumbnails">
+			  <li class="span4" ng-repeat="page in pages">
+				<a class="thumbnail page-content" href="#{{page}}">
+				  <h2>{{page}}</h2>
+				</a>
+				</li>
+				</ul>
+	 </div>
+	 </div>
+	 </div>
+<div ng-controller="Main" class="container ">
+<div class="container-inner whitepage"  class="home">
+      <div class="row">
+	  <div class="span12">
     <div ng-hide="home" class="page">
         <h1>{{hash}}</h1>
 	    <form name="addForm">
@@ -42,8 +124,8 @@
 	    
 	    <div class="imageSection" ng-show="section.type=='image'" > <img ng-src="{{section.url}}" style="max-width:300px;"/><button ng-click="setImage(key, section.url)" >更换</button></div>
 	        </form></div>
-    </div>    
-  
+    </div>    </div> 
+ </div></div> 
 </div>
 
 </body>
